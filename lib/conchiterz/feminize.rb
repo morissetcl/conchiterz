@@ -3,11 +3,17 @@ module Conchiterz
     def self.translate(string)
       return if string.nil?
       result = []
-      a_words = string.split
+      a_words = string.scan(/[\w'-]+|\W+/).select {|x| x.match(/\S/)}
       a_words.each do |word|
         analyze_string(word, result)
       end
-      result.join(' ')
+      result.each_cons(2) do |r, a|
+        if a == ', '
+          v = r.insert(-1, a.strip)
+          result.delete(a)
+        end
+      end
+      p result.join(' ')
     end
 
     private
@@ -26,28 +32,30 @@ module Conchiterz
 
     def self.get_key(capitalized, upcased, result, word)
       key = TRANSLATION.key(word.downcase)
-      if check_sensitive(capitalized, upcased) == false
-        result << key
-      else
-        result << key.capitalize if capitalized
-        result << key.upcase if upcased
-      end
+      add_value_to_result(capitalized, upcased, key, result)
     end
-
 
     def self.get_value(capitalized, upcased, result, word)
       value = TRANSLATION.fetch(word.downcase)
+      add_value_to_result(capitalized, upcased, value, result)
+    end
+
+    def self.add_value_to_result(capitalized, upcased, type, result)
       if check_sensitive(capitalized, upcased) == false
-        result << value
+        result << type
       else
-        result << value.capitalize if capitalized
-        result << value.upcase if upcased
+        capitalize_or_upcase?(capitalized, upcased, type, result)
       end
     end
 
     def self.check_sensitive(capitalized, upcased)
       return unless (capitalized == false && upcased == false)
       false
+    end
+
+    def self.capitalize_or_upcase?(capitalized, upcased, type, result)
+      result << type.capitalize if capitalized
+      result << type.upcase if upcased
     end
 
     TRANSLATION =
@@ -60,7 +68,9 @@ module Conchiterz
         'nouveau' => 'nouvelle',
         'inscrit' => 'inscrite',
         'animateur' => 'animatrice',
-        'joueur' => 'joueuse'
+        'joueur' => 'joueuse',
+        'pareil' => 'pareille',
+        'pareils' => 'pareilles'
       }
   end
 end
