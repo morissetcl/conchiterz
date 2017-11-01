@@ -13,7 +13,7 @@ module Conchiterz
           result.delete(a)
         end
       end
-      p result.join(' ')
+      result.join(' ')
     end
 
     private
