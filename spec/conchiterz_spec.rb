@@ -18,5 +18,9 @@ describe Conchiterz::Feminize do
   end
   it 'return string with the same punctuation' do
     expect(Conchiterz::Feminize.translate('Il est BEAU, vraiment beau')).to eql('Elle est BELLE, vraiment belle')
+    expect(Conchiterz::Feminize.translate('Elle est Inscrite, vraiment inscrite')).to eql('Il est Inscrit, vraiment inscrit')
+  end
+  it 'handle word with only one letter' do
+    expect(Conchiterz::Feminize.translate('M Lawson')).to eql('Mme Lawson')
   end
 end
