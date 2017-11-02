@@ -7,26 +7,29 @@ module Conchiterz
       a_words.each do |word|
         analyze_string(word, result)
       end
-      result.each_cons(2) do |r, a|
-        if a == ', '
-          v = r.insert(-1, a.strip)
-          result.delete(a)
-        end
-      end
+      check_punctuation(result)
       result.join(' ')
     end
 
     private
 
     def self.analyze_string(word, result)
-      capitalized = (word == word.capitalize)
-      upcased = (word == word.upcase)
+      check_word_length(word)
       if TRANSLATION.has_value?(word.downcase)
-        get_key(capitalized, upcased, result, word)
+        get_key(@capitalized, @upcased, result, word)
       elsif TRANSLATION.has_key?(word.downcase)
-        get_value(capitalized, upcased, result, word)
+        get_value(@capitalized, @upcased, result, word)
       else
         result.push(word)
+      end
+    end
+
+    def self.check_word_length(word)
+      if word.length == 1
+        @capitalized = (word == word.capitalize)
+      else
+        @capitalized = (word == word.capitalize)
+        @upcased = (word == word.upcase)
       end
     end
 
@@ -58,6 +61,15 @@ module Conchiterz
       result << type.upcase if upcased
     end
 
+    def self.check_punctuation(result)
+      result.each_cons(2) do |r, a|
+        if a == ', '
+          v = r.insert(-1, a.strip)
+          result.delete(a)
+        end
+      end
+    end
+
     TRANSLATION =
       {
         'beau' => 'belle',
@@ -70,7 +82,9 @@ module Conchiterz
         'animateur' => 'animatrice',
         'joueur' => 'joueuse',
         'pareil' => 'pareille',
-        'pareils' => 'pareilles'
+        'pareils' => 'pareilles',
+        'monsieur' => 'madame',
+        'm' => 'mme'
       }
   end
 end
