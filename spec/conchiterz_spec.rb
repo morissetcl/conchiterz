@@ -23,4 +23,10 @@ describe Conchiterz::Feminize do
   it 'handle word with only one letter' do
     expect(Conchiterz::Feminize.translate('M Lawson')).to eql('Mme Lawson')
   end
+  it 'handle word with a full stop' do
+    expect(Conchiterz::Feminize.translate('Bonjour Mme Lawson.')).to eql('Bonjour M Lawson.')
+  end
+  it 'handle word with accent and other special character' do
+    expect(Conchiterz::Feminize.translate("Merci d'être inscrite")).to eql("Merci d'être inscrit")
+  end
 end

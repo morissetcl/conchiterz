@@ -63,7 +63,7 @@ module Conchiterz
 
     def self.check_punctuation(result)
       result.each_cons(2) do |r, a|
-        if a == ', '
+        if a == ', ' || a == '.'
           v = r.insert(-1, a.strip)
           result.delete(a)
         end
@@ -84,7 +84,8 @@ module Conchiterz
         'pareil' => 'pareille',
         'pareils' => 'pareilles',
         'monsieur' => 'madame',
-        'm' => 'mme'
+        'm' => 'mme',
+        'le' => 'la'
       }
   end
 end
