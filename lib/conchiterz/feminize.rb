@@ -84,7 +84,8 @@ module Conchiterz
         'pareil' => 'pareille',
         'pareils' => 'pareilles',
         'monsieur' => 'madame',
-        'm' => 'mme'
+        'm' => 'mme',
+        'le' => 'la'
       }
   end
 end
