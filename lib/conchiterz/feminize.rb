@@ -8,6 +8,7 @@ module Conchiterz
         analyze_string(word, result)
       end
       check_punctuation(result)
+      check_special_character(result)
       result.join(' ')
     end
 
@@ -63,12 +64,21 @@ module Conchiterz
 
     def self.check_punctuation(result)
       result.each_cons(2) do |r, a|
-        if a == ', '
+        if a == ', ' || r == 'ê'
           v = r.insert(-1, a.strip)
           result.delete(a)
         end
       end
     end
+
+    def self.check_special_character(result)
+       result.each_cons(2) do |r, a|
+         if r[-1] == "'"
+           v = r.insert(-1, a.strip)
+           result.delete(a)
+         end
+       end
+     end
 
     TRANSLATION =
       {
