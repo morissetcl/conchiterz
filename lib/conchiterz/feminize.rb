@@ -3,7 +3,7 @@ module Conchiterz
     def self.translate(string)
       return if string.nil?
       result = []
-      a_words = string.scan(/[\w'-]+|\W+/).select {|x| x.match(/\S/)}
+      a_words = string.scan(/[[:alpha:]]+|[.,!?']+/)
       a_words.each do |word|
         analyze_string(word, result)
       end
@@ -63,19 +63,26 @@ module Conchiterz
     end
 
     def self.check_punctuation(result)
-      result.each_cons(2) do |r, a|
-        if a == ', ' || r == 'ê'
-          v = r.insert(-1, a.strip)
-          result.delete(a)
+      result.each_with_index do |val, index|
+        if val == ','
+          a = result.index(val)
+          result[a].insert(0, result[a-1])
+          result.delete(result[a-1])
         end
       end
     end
 
     def self.check_special_character(result)
-       result.each_cons(2) do |r, a|
-         if r[-1] == "'"
-           v = r.insert(-1, a.strip)
-           result.delete(a)
+       result.each_with_index do |val, index|
+         if val == "'"
+           a = result.index(val)
+           b = result[a].insert(0, result[a-1])
+           index1 =result.index(b)
+           c = result[index1].insert(-1, result[index1+1])
+           d = result[result.index(c)+1]
+           v = result[result.index(c)-1]
+           result.delete(d)
+           result.delete(v)
          end
        end
      end
@@ -97,5 +104,6 @@ module Conchiterz
         'm' => 'mme',
         'le' => 'la'
       }
+
   end
 end

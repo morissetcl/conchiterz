@@ -24,6 +24,6 @@ describe Conchiterz::Feminize do
     expect(Conchiterz::Feminize.translate('M Lawson')).to eql('Mme Lawson')
   end
   it 'handle word with accent and other special character' do
-    expect(Conchiterz::Feminize.translate("Merci, d'être inscrite")).to eql("Merci, d'être inscrit")
+    expect(Conchiterz::Feminize.translate("Merci, d'être inscrite, ça vô, c'est cool")).to eql("Merci, d'être inscrit, ça vô, c'est cool")
   end
 end
