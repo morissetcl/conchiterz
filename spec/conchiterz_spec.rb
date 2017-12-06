@@ -18,7 +18,6 @@ describe Conchiterz do
   end
   it 'return string with the same punctuation' do
     expect(Conchiterz.translate('Il est BEAU, vraiment beau')).to eql('Elle est BELLE, vraiment belle')
-    expect(Conchiterz.translate('Elle est Inscrite, vraiment inscrite')).to eql('Il est Inscrit, vraiment inscrit')
   end
   it 'handle word with only one letter' do
     expect(Conchiterz.translate('M Lawson')).to eql('Mme Lawson')
