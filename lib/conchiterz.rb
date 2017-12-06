@@ -1,23 +1,25 @@
 module Conchiterz
-  def self.translate(string)
+  def self.translate(string, boolean)
     return if string.nil?
     result = []
     a_words = string.scan(/[[:alpha:]]+|[.,!?']+/)
-    a_words.each do |word|
-      analyze_string(word, result)
+    if boolean == true
+      a_words.each do |word|
+        analyze_string(word, result)
+      end
+      check_punctuation(result)
+      check_special_character(result)
+      result.join(' ')
+    else
+      return string
     end
-    check_punctuation(result)
-    check_special_character(result)
-    result.join(' ')
   end
 
   private
 
   def self.analyze_string(word, result)
     check_word_length(word)
-    if TRANSLATION.has_value?(word.downcase)
-      get_key(@capitalized, @upcased, result, word)
-    elsif TRANSLATION.has_key?(word.downcase)
+    if TRANSLATION.has_key?(word.downcase)
       get_value(@capitalized, @upcased, result, word)
     else
       result.push(word)
