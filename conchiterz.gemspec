@@ -6,7 +6,6 @@ require 'version'
 Gem::Specification.new do |spec|
   spec.name          = "conchiterz"
   spec.version       = Conchiterz::VERSION
-  s.platform         = Gem::Platform::RUBY
   spec.authors       = ["Clement Morisset"]
   spec.email         = ["morissetcl87@gmail.com"]
 
