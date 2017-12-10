@@ -2,7 +2,7 @@ module Conchiterz
   module StringMethods
     def conchiterz(boolean); Conchiterz.translate(self, boolean); end
   end
-  
+
   def self.translate(string, boolean)
     return if string.nil?
     result = []
@@ -111,7 +111,9 @@ module Conchiterz
       'pareils' => 'pareilles',
       'monsieur' => 'madame',
       'm' => 'mme',
-      'le' => 'la'
+      'le' => 'la',
+      'chers' => 'chères',
+      'cher' => 'chère'
     }
 
 end
