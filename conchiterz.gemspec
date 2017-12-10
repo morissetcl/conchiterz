@@ -6,9 +6,11 @@ require 'version'
 Gem::Specification.new do |spec|
   spec.name          = "conchiterz"
   spec.version       = Conchiterz::VERSION
+  s.platform         = Gem::Platform::RUBY
   spec.authors       = ["Clement Morisset"]
   spec.email         = ["morissetcl87@gmail.com"]
 
+  spec.homepage      = "https://github.com/morissetcl/conchiterz"
   spec.summary       = "Conchiterz allow you to feminize french word/sentence"
   spec.license       = "MIT"
   spec.add_development_dependency "rspec", "~> 3.2"
