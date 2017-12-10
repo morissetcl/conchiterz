@@ -28,4 +28,17 @@ describe Conchiterz do
   it 'does not translate sentence if the switch trigger is set to false' do
     expect(Conchiterz.translate('M Lawson', false)).to eql('M Lawson')
   end
+
+  describe Conchiterz::StringMethods do
+
+    before :all do
+      Conchiterz.monkey_patch(String)
+      @masculin = 'Bravo vous êtes inscrit.'
+    end
+
+    it "monkey_patch switch of the same way than without" do
+      expect( @masculin.conchiterz(true)).to eq(Conchiterz.translate(@masculin, true))
+      expect( @masculin.conchiterz(false)).to eq(Conchiterz.translate(@masculin, false))
+    end
+  end
 end
