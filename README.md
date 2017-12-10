@@ -46,7 +46,7 @@ Will return
 ```
 "Vous êtes bien inscrite à notre newsletter."
 ```
-if you user is a female.
+if your pratiquant is a female.
 
 ## Contributing
 
