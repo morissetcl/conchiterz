@@ -9,9 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Clement Morisset"]
   spec.email         = ["morissetcl87@gmail.com"]
 
-  spec.summary       = %q{ok: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{ok: Write a longer description or delete this line.}
-  spec.homepage      = "ok: Put your gem's website or public repo URL here."
+  spec.summary       = "Conchiterz allow you to feminize french word/sentence"
   spec.license       = "MIT"
   spec.add_development_dependency "rspec", "~> 3.2"
 
