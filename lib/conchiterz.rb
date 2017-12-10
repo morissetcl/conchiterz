@@ -1,4 +1,8 @@
 module Conchiterz
+  module StringMethods
+    def conchiterz(boolean); Conchiterz.translate(self, boolean); end
+  end
+  
   def self.translate(string, boolean)
     return if string.nil?
     result = []
@@ -13,6 +17,10 @@ module Conchiterz
     else
       return string
     end
+  end
+
+  def monkey_patch(mod)
+    mod.send(:include, Conchiterz::StringMethods)
   end
 
   private
@@ -74,19 +82,19 @@ module Conchiterz
   end
 
   def self.check_special_character(result)
-     result.each_with_index do |val, index|
-       if val == "'"
-         a = result.index(val)
-         b = result[a].insert(0, result[a-1])
-         index1 = result.index(b)
-         c = result[index1].insert(-1, result[index1+1])
-         d = result[result.index(c)+1]
-         v = result[result.index(c)-1]
-         result.delete_at(result.index(v))
-         result.delete_at(result.index(c)+1)
-       end
-     end
-   end
+    result.each_with_index do |val, index|
+      if val == "'"
+        a = result.index(val)
+        b = result[a].insert(0, result[a-1])
+        index1 = result.index(b)
+        c = result[index1].insert(-1, result[index1+1])
+        d = result[result.index(c)+1]
+        v = result[result.index(c)-1]
+        result.delete_at(result.index(v))
+        result.delete_at(result.index(c)+1)
+      end
+    end
+  end
 
   TRANSLATION =
     {
@@ -106,4 +114,8 @@ module Conchiterz
       'le' => 'la'
     }
 
+end
+
+if defined?(Rails)
+  Conchiterz.monkey_patch(String)
 end
