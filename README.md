@@ -1,8 +1,6 @@
 # Conchiterz
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/conchiterz`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A simply gem to feminize french word and french sentence.
 
 ## Installation
 
@@ -21,21 +19,27 @@ Or install it yourself as:
     $ gem install conchiterz
 
 ## Usage
+`Conchiterz.translate(string, boolean)` feminize a french string if boolean is evaluates to true.
 
-TODO: Write usage instructions here
+If you give feminine string whatever the boolean value, the same string will be returned.
 
-## Development
+## Rails
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+It adds String#conchiterz(boolean)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+So in your view,
+
+```ruby
+# app/views/pratiquants/show.html.erb
+
+<%= "Vous êtes bien inscrit à notre newsletter".conchiterz(@pratiquant.female?) %>
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/conchiterz. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/morissetcl/conchiterz. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
