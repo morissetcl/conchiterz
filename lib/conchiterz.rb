@@ -19,7 +19,7 @@ module Conchiterz
     end
   end
 
-  def monkey_patch(mod)
+  def self.monkey_patch(mod)
     mod.send(:include, Conchiterz::StringMethods)
   end
 
