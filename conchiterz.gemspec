@@ -15,8 +15,6 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
   spec.add_development_dependency "rspec", "~> 3.2"
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = "ok: Set to 'http://mygemserver.com'"
   else
