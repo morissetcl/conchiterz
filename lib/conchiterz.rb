@@ -1,9 +1,11 @@
 module Conchiterz
+  extend self
+
   module StringMethods
     def conchiterz(boolean); Conchiterz.translate(self, boolean); end
   end
 
-  def self.translate(string, boolean)
+  def translate(string, boolean)
     return if string.nil?
     result = []
     a_words = string.scan(/[[:alpha:]]+|[.,!?']+/)
@@ -19,13 +21,13 @@ module Conchiterz
     end
   end
 
-  def self.monkey_patch(mod)
+  def monkey_patch(mod)
     mod.send(:include, Conchiterz::StringMethods)
   end
 
   private
 
-  def self.analyze_string(word, result)
+  def analyze_string(word, result)
     check_word_length(word)
     if TRANSLATION.has_key?(word.downcase)
       get_value(@capitalized, @upcased, result, word)
@@ -34,7 +36,7 @@ module Conchiterz
     end
   end
 
-  def self.check_word_length(word)
+  def check_word_length(word)
     if word.length == 1
       @capitalized = (word == word.capitalize)
     else
@@ -43,17 +45,12 @@ module Conchiterz
     end
   end
 
-  def self.get_key(capitalized, upcased, result, word)
-    key = TRANSLATION.key(word.downcase)
-    add_value_to_result(capitalized, upcased, key, result)
-  end
-
-  def self.get_value(capitalized, upcased, result, word)
+  def get_value(capitalized, upcased, result, word)
     value = TRANSLATION.fetch(word.downcase)
     add_value_to_result(capitalized, upcased, value, result)
   end
 
-  def self.add_value_to_result(capitalized, upcased, type, result)
+  def add_value_to_result(capitalized, upcased, type, result)
     if check_sensitive(capitalized, upcased) == false
       result << type
     else
@@ -61,17 +58,17 @@ module Conchiterz
     end
   end
 
-  def self.check_sensitive(capitalized, upcased)
+  def check_sensitive(capitalized, upcased)
     return unless (capitalized == false && upcased == false)
     false
   end
 
-  def self.capitalize_or_upcase?(capitalized, upcased, type, result)
+  def capitalize_or_upcase?(capitalized, upcased, type, result)
     result << type.capitalize if capitalized
     result << type.upcase if upcased
   end
 
-  def self.check_punctuation(result)
+  def check_punctuation(result)
     result.each_with_index do |val, index|
       if val == ',' || val == '.'
         a = result.index(val)
@@ -81,7 +78,7 @@ module Conchiterz
     end
   end
 
-  def self.check_special_character(result)
+  def check_special_character(result)
     result.each_with_index do |val, index|
       if val == "'"
         a = result.index(val)
