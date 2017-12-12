@@ -20,7 +20,7 @@ describe Conchiterz do
     expect(Conchiterz.translate('Il est BEAU, vraiment beau', false)).to eql('Il est BEAU, vraiment beau')
   end
   it 'switch word with accent and other special character' do
-    expect(Conchiterz.translate("Merci, d'être inscrit, ça vô, c'est cool.", true)).to eql("Merci, d'être inscrite, ça vô, c'est cool.")
+    expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence.", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence.")
   end
   it 'translate word with only one letter' do
     expect(Conchiterz.translate('M Lawson', true)).to eql('Mme Lawson')
