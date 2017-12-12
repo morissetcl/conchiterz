@@ -79,15 +79,18 @@ module Conchiterz
   def check_special_character(result)
     result.each_with_index do |val, index|
       if val == "'"
-        a = result.index(val)
-        b = result[a].insert(0, result[a-1])
-        index1 = result.index(b)
-        c = result[index1].insert(-1, result[index1+1])
-        d = result[result.index(c)+1]
-        v = result[result.index(c)-1]
-        result.delete_at(result.index(v))
-        result.delete_at(result.index(c)+1)
+        index = result.index(val)
+        word = [result[index-1], result[index], result[index+1]]
+        delete_useless_value(word, index, result)
+        result.insert(index-1, word.join(''))
       end
+    end
+  end
+
+  def delete_useless_value(word, index, result)
+    word.each do |a|
+      index_to_delete = result.index(a)
+      result.delete_at(index_to_delete)
     end
   end
 
