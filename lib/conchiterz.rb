@@ -2,17 +2,15 @@ module Conchiterz
   extend self
 
   module StringMethods
-    def conchiterz(boolean); Conchiterz.translate(self, boolean); end
+    def conchiterz(switch); Conchiterz.translate(self, switch); end
   end
 
-  def translate(string, boolean)
+  def translate(string, switch)
     return if string.nil?
     result = []
     a_words = string.scan(/[[:alpha:]]+|[.,!?']+/)
-    if boolean == true
-      a_words.each do |word|
-        analyze_string(word, result)
-      end
+    if switch == true
+      a_words.each{ |word| analyze_string(word, result) }
       check_punctuation(result)
       check_special_character(result)
       result.join(' ')
