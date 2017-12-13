@@ -7,14 +7,18 @@ module Conchiterz
     end
   end
 
-  def translate(string, switch)
+  def translate(string, switch, escape = [])
     return if string.nil?
     result = []
     a_words = string.scan(/[[:alpha:]]+|[.,!?';]+/)
+    delete = a_words.index(escape.join(''))
+    a_words.delete(escape.join(''))
     if switch == true
       a_words.each{ |word| analyze_string(word, result) }
       check_punctuation(result)
       check_special_character(result)
+      p delete - 1
+      result.insert(delete-2, escape.join(''))
       result.join(' ')
     else
       return string
@@ -114,7 +118,8 @@ module Conchiterz
       'm' => 'mme',
       'le' => 'la',
       'chers' => 'chères',
-      'cher' => 'chère'
+      'cher' => 'chère',
+      'bon' => 'bonne'
     }
 
 end
