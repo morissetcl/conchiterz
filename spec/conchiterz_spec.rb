@@ -19,8 +19,14 @@ describe Conchiterz do
   it 'return string with the same punctuation' do
     expect(Conchiterz.translate('Il est BEAU, vraiment beau', false)).to eql('Il est BEAU, vraiment beau')
   end
-  it 'switch word with accent and other special character' do
-    expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence.", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence.")
+  it 'handle word with special character as accent' do
+    expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence")
+  end
+  it 'Punctuation: handle sentence with colon and semicolon' do
+    expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence;", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence;")
+  end
+  it 'Punctuation: handle sentence with dot and bang!' do
+    expect(Conchiterz.translate("Merci, d'être inscrit! ç'est en août que ça commence.", true)).to eql("Merci, d'être inscrite! ç'est en août que ça commence.")
   end
   it 'translate word with only one letter' do
     expect(Conchiterz.translate('M Lawson', true)).to eql('Mme Lawson')

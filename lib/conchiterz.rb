@@ -8,7 +8,7 @@ module Conchiterz
   def translate(string, switch)
     return if string.nil?
     result = []
-    a_words = string.scan(/[[:alpha:]]+|[.,!?']+/)
+    a_words = string.scan(/[[:alpha:]]+|[.,!?';]+/)
     if switch == true
       a_words.each{ |word| analyze_string(word, result) }
       check_punctuation(result)
@@ -67,11 +67,12 @@ module Conchiterz
   end
 
   def check_punctuation(result)
+    punctuation = [',','.','!',':',';']
     result.each_with_index do |val, index|
-      if val == ',' || val == '.'
-        a = result.index(val)
-        result[a].insert(0, result[a-1])
-        result.delete(result[a-1])
+      if punctuation.include?(val)
+        index = result.index(val)
+        result[index].insert(0, result[index-1])
+        result.delete(result[index-1])
       end
     end
   end
