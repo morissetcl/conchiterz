@@ -2,7 +2,9 @@ module Conchiterz
   extend self
 
   module StringMethods
-    def conchiterz(switch); Conchiterz.translate(self, switch); end
+    def conchiterz(switch)
+      Conchiterz.translate(self, switch)
+    end
   end
 
   def translate(string, switch)
@@ -19,8 +21,8 @@ module Conchiterz
     end
   end
 
-  def monkey_patch(mod)
-    mod.send(:include, Conchiterz::StringMethods)
+  def monkey_patch(str)
+    str.send(:include, Conchiterz::StringMethods)
   end
 
   private
@@ -48,22 +50,22 @@ module Conchiterz
     add_value_to_result(capitalized, upcased, value, result)
   end
 
-  def add_value_to_result(capitalized, upcased, type, result)
+  def add_value_to_result(capitalized, upcased, value, result)
     if check_sensitive(capitalized, upcased) == false
-      result << type
+      result << value
     else
-      capitalize_or_upcase?(capitalized, upcased, type, result)
+      capitalize_or_upcase(capitalized, upcased, value, result)
     end
   end
 
   def check_sensitive(capitalized, upcased)
-    return unless (capitalized == false && upcased == false)
+    return if (capitalized == true || upcased == true)
     false
   end
 
-  def capitalize_or_upcase?(capitalized, upcased, type, result)
-    result << type.capitalize if capitalized
-    result << type.upcase if upcased
+  def capitalize_or_upcase(capitalized, upcased, value, result)
+    result << value.capitalize if capitalized
+    result << value.upcase if upcased
   end
 
   def check_punctuation(result)
