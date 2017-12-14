@@ -2,17 +2,17 @@ module Conchiterz
   extend self
 
   module StringMethods
-    def conchiterz(switch)
-      Conchiterz.translate(self, switch)
+    def conchiterz(switch, escape = [])
+      Conchiterz.translate(self, switch, escape = [])
     end
   end
 
-  def translate(string, switch)
+  def translate(string, switch, escape = [])
     return if string.nil?
     result = []
     a_words = string.scan(/[[:alpha:]]+|[.,!?';]+/)
     if switch == true
-      a_words.each{ |word| analyze_string(word, result) }
+      a_words.each{ |word| analyze_string(word, result, escape) }
       check_punctuation(result)
       check_special_character(result)
       result.join(' ')
@@ -27,9 +27,11 @@ module Conchiterz
 
   private
 
-  def analyze_string(word, result)
+  def analyze_string(word, result, escape)
     check_word_length(word)
-    if TRANSLATION.has_key?(word.downcase)
+    if TRANSLATION.has_key?(word.downcase) && escape.include?(word)
+      result.push(word)
+    elsif TRANSLATION.has_key?(word.downcase)
       get_value(@capitalized, @upcased, result, word)
     else
       result.push(word)
@@ -114,7 +116,10 @@ module Conchiterz
       'm' => 'mme',
       'le' => 'la',
       'chers' => 'chères',
-      'cher' => 'chère'
+      'cher' => 'chère',
+      'bon' => 'bonne',
+      'super' => 'superbe',
+      'nouveau' => 'nouvelle'
     }
 
 end

@@ -38,15 +38,23 @@ describe Conchiterz do
     expect(Conchiterz.translate('M Lawson', false)).to eql('M Lawson')
   end
 
+  it 'one word escaped: does not change a word which is included in escape array' do
+    expect(Conchiterz.translate("Martin, vous êtes beau, nous vous souhaitons un joyeux anniversaire", true, escape = ['joyeux'])).to eql('Martin, vous êtes belle, nous vous souhaitons un joyeux anniversaire')
+  end
+
+  it 'several words escaped: does not change words which are included in escape array' do
+    expect(Conchiterz.translate("Martin, bon vent, vous êtes beau, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!", true, escape = ['joyeux', 'bon'])).to eql('Martin, bon vent, vous êtes belle, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!')
+  end
+
   describe Conchiterz::StringMethods do
 
     before :all do
       Conchiterz.monkey_patch(String)
-      @masculin = 'Bravo vous êtes inscrit.'
+      @masculin = 'Bravo vous êtes inscrit. Joyeux anniversaire et bon vent!'
     end
 
     it "monkey_patch switch of the same way than without" do
-      expect( @masculin.conchiterz(true)).to eq(Conchiterz.translate(@masculin, true))
+      expect( @masculin.conchiterz(true, escape = ['joyeux', 'bon'])).to eq(Conchiterz.translate(@masculin, true))
       expect( @masculin.conchiterz(false)).to eq(Conchiterz.translate(@masculin, false))
     end
   end
