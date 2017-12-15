@@ -118,8 +118,7 @@ module Conchiterz
       'chers' => 'chères',
       'cher' => 'chère',
       'bon' => 'bonne',
-      'super' => 'superbe',
-      'nouveau' => 'nouvelle'
+      'super' => 'superbe'
     }
 
 end

@@ -50,7 +50,7 @@ describe Conchiterz do
 
     before :all do
       Conchiterz.monkey_patch(String)
-      @masculin = 'Bravo vous êtes inscrit. Joyeux anniversaire et bon vent!'
+      @masculin = "Bravo vous êtes inscrit, merci d'être la. Joyeux anniversaire et bon vent!"
     end
 
     it "monkey_patch switch of the same way than without" do
