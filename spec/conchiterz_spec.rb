@@ -38,12 +38,16 @@ describe Conchiterz do
     expect(Conchiterz.translate('M Lawson', false)).to eql('M Lawson')
   end
 
+  it 'handle and return number' do
+    expect(Conchiterz.translate("Vous êtes inscrit pour l'année 2018", true)).to eql("Vous êtes inscrite pour l'année 2018")
+  end
+
   it 'one word escaped: does not change a word which is included in escape array' do
-    expect(Conchiterz.translate("Martin, vous êtes beau, nous vous souhaitons un joyeux anniversaire", true, ['joyeux'])).to eql('Martin, vous êtes belle, nous vous souhaitons un joyeux anniversaire')
+    expect(Conchiterz.translate("Martin, vous êtes beau, nous vous souhaitons un joyeux anniversaire", true, ['joyeux', 'un'])).to eql('Martin, vous êtes belle, nous vous souhaitons un joyeux anniversaire')
   end
 
   it 'several words escaped: does not change words which are included in escape array' do
-    expect(Conchiterz.translate("Martin, bon vent, vous êtes beau, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!", true, ['joyeux', 'bon'])).to eql('Martin, bon vent, vous êtes belle, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!')
+    expect(Conchiterz.translate("Martin, bon vent, vous êtes beau, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!", true, ['joyeux', 'bon', 'un'])).to eql('Martin, bon vent, vous êtes belle, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!')
   end
 
   describe Conchiterz::StringMethods do

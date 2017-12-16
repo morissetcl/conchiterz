@@ -10,7 +10,7 @@ module Conchiterz
   def translate(string, switch, escape = [])
     return if string.nil?
     result = []
-    a_words = string.scan(/[[:alpha:]]+|[.,!?';]+/)
+    a_words = string.scan(/[[:alpha:][:digit:]]+|[.,!?';]+/)
     if switch == true
       a_words.each{ |word| analyze_string(word, result, escape) }
       check_punctuation(result)
@@ -118,7 +118,9 @@ module Conchiterz
       'chers' => 'chères',
       'cher' => 'chère',
       'bon' => 'bonne',
-      'super' => 'superbe'
+      'super' => 'superbe',
+      'un' => 'une',
+      'heureux' => 'heureuse'
     }
 
 end
