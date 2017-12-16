@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["morissetcl87@gmail.com"]
 
   spec.homepage      = "https://github.com/morissetcl/conchiterz"
-  spec.summary       = "Conchiterz allow you to feminize french word/sentence"
+  spec.summary       = "Conchiterz allows you to feminize french sentence"
   spec.license       = "MIT"
   spec.add_development_dependency "rspec", "~> 3.2"
 
