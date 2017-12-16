@@ -20,8 +20,8 @@ Or install it yourself as:
 
     $ gem install conchiterz
 
-## Usage
-`Conchiterz.translate(string, boolean)` feminize a french string if boolean is evaluates to true.
+## Get started
+`Conchiterz.translate(string, boolean, escape = [])` feminize a french string if boolean is evaluates to true.
 
 Use on your CLI :
 ```ruby
@@ -33,22 +33,69 @@ Use on your CLI :
 
 If you give feminine string whatever the boolean value, the same string will be returned.
 
+### Escaping words
+
+Sometimes in french you should have the need to not feminize some word in function of the context of your sentence.
+
+Take the following code and sentence:
+
+```ruby
+Conchiterz.translate('Nous vous souhaitons un joyeux réveillon, soyez heureux en 2018'
+, true)
+```
+
+We don't want the following result:
+
+```ruby
+'Nous vous souhaitons un**e** joyeu**se** réveillon, soyez heureuse en 2018'
+```
+Because 'un joyeux réveillon' is invariable in french.
+
+In this way let's introduce the escape option.
+
+Just add an array of which words you not wanted to feminize, check the following code:
+
+```ruby
+[1] pry(main)> require 'conchiterz'
+=> true
+[2] pry(main)> Conchiterz.translate('Nous vous souhaitons un joyeux réveillon, soyez heureux en 2018'
+, true, ['un', 'joyeux'])
+=> 'Nous vous souhaitons un joyeux réveillon, soyez heureuse en 2018'
+```
+Et voila! Easy to feminize your sentence still understandable by french speaker.
+
 ## Rails
 
-It adds String#conchiterz(boolean)
+It adds String#conchiterz(boolean, escape = [])
 
-So in your view,
+If you just want to feminize a sentence add in your view,
 
 ```ruby
 # app/views/pratiquants/show.html.erb
 
-<%= "Vous êtes bien inscrit à notre newsletter.".conchiterz(@pratiquant.female?) %>
+<%= 'Vous êtes bien inscrit à notre newsletter.'.conchiterz(@pratiquant.female?) %>
 ```
 Will return
-```
+
+```ruby
 "Vous êtes bien inscrite à notre newsletter."
 ```
 if your pratiquant is a female.
+
+### Escaping words
+
+You wanted to escape some words? Just add these words inside an array and pass it as argument, as follow..
+
+```ruby
+# app/views/pratiquants/show.html.erb
+
+<%= 'Nous vous souhaitons un joyeux réveillon et soyez heureux en 2018'.conchiterz(@pratiquant.female?,['un', 'joyeux']) %>
+```
+Will return
+
+```ruby
+'Nous vous souhaitons un joyeux réveillon et soyez heureuse en 2018'
+```
 
 ## Contributing
 
