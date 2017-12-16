@@ -3,7 +3,7 @@ module Conchiterz
 
   module StringMethods
     def conchiterz(switch, escape = [])
-      Conchiterz.translate(self, switch, escape = [])
+      Conchiterz.translate(self, switch, escape)
     end
   end
 
@@ -71,7 +71,7 @@ module Conchiterz
   end
 
   def check_punctuation(result)
-    punctuation = [',','.','!',':',';']
+    punctuation = [',','.','!',':',';','?']
     result.each_with_index do |val, index|
       if punctuation.include?(val)
         index = result.index(val)
