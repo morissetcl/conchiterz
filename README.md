@@ -47,7 +47,7 @@ Conchiterz.translate('Nous vous souhaitons un joyeux réveillon, soyez heureux e
 We don't want the following result:
 
 ```ruby
-'Nous vous souhaitons un**e** joyeu**se** réveillon, soyez heureuse en 2018'
+'Nous vous souhaitons une joyeuse réveillon, soyez heureuse en 2018'
 ```
 Because 'un joyeux réveillon' is invariable in french.
 
