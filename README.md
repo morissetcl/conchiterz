@@ -5,7 +5,7 @@
 A simply gem to feminize french word and french sentence.
 
 * Keep intact upcase, downcase and capitalize letters
-* Hanfle numbers
+* Handle numbers
 * Keep intact punctuation
 * Handle special characters
 
