@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/conchiterz.svg)
+[![Gem Version](https://badge.fury.io/rb/conchiterz.svg)](https://badge.fury.io/rb/conchiterz)
 
 # Conchiterz
 
