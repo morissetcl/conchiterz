@@ -1,5 +1,4 @@
 [![Gem Version](https://badge.fury.io/rb/conchiterz.svg)](https://badge.fury.io/rb/conchiterz)
-
 # Conchiterz
 
 A simply gem to feminize french word and french sentence.
