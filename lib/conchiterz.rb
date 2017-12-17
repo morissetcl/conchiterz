@@ -1,3 +1,5 @@
+require 'yaml'
+
 module Conchiterz
   extend self
 
@@ -104,31 +106,7 @@ module Conchiterz
   end
 
   PUNCTUATION = [[';',':','!','?'],['.',',','...']]
-
-  TRANSLATION =
-    {
-      'beau' => 'belle',
-      'joyeux' => 'joyeuse',
-      'il' => 'elle',
-      'ils' => 'elles',
-      'présent' => 'presente',
-      'nouveau' => 'nouvelle',
-      'inscrit' => 'inscrite',
-      'animateur' => 'animatrice',
-      'joueur' => 'joueuse',
-      'pareil' => 'pareille',
-      'pareils' => 'pareilles',
-      'monsieur' => 'madame',
-      'm' => 'mme',
-      'le' => 'la',
-      'chers' => 'chères',
-      'cher' => 'chère',
-      'bon' => 'bonne',
-      'super' => 'superbe',
-      'un' => 'une',
-      'heureux' => 'heureuse'
-    }
-
+  TRANSLATION = YAML.load_file("lib/words.yaml")
 end
 
 if defined?(Rails)
