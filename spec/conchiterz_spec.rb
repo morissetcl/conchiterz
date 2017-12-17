@@ -25,14 +25,9 @@ describe Conchiterz do
   it 'handle word with special character as accent' do
     expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence")
   end
-  it 'Punctuation: handle sentence with colon and semicolon' do
-    expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence;", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence;")
-  end
-  it 'Punctuation: handle sentence with dot and bang!' do
-    expect(Conchiterz.translate("Merci, d'être inscrit! ç'est en août que ça commence.", true)).to eql("Merci, d'être inscrite! ç'est en août que ça commence.")
-  end
+
   it 'translate word with only one letter' do
-    expect(Conchiterz.translate('M Lawson?', true)).to eql('Mme Lawson?')
+    expect(Conchiterz.translate('M Lawson', true)).to eql('Mme Lawson')
   end
   it 'does not translate sentence if the switch trigger is set to false' do
     expect(Conchiterz.translate('M Lawson', false)).to eql('M Lawson')
@@ -47,7 +42,16 @@ describe Conchiterz do
   end
 
   it 'several words escaped: does not change words which are included in escape array' do
-    expect(Conchiterz.translate("Martin, bon vent, vous êtes beau, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!", true, ['joyeux', 'bon', 'un'])).to eql('Martin, bon vent, vous êtes belle, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon!')
+    expect(Conchiterz.translate("Martin, bon vent, vous êtes beau, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon !", true, ['joyeux', 'bon', 'un'])).to eql('Martin, bon vent, vous êtes belle, par conséquent nous vous souhaitons un joyeux anniversaire et un bon réveillon !')
+  end
+
+  describe 'Punctuation which respect french rules' do
+    it 'Handle sentence which need to be returned like this: text[punctuation][space]text' do
+      expect(Conchiterz.translate("Merci, d'être inscrit. C'est en août que ça commence...Super.", true, ['Super'])).to eql("Merci, d'être inscrite. C'est en août que ça commence... Super.")
+    end
+    it 'Handle sentence which need to be returned like this: text[space][punctuation][space]texte' do
+      expect(Conchiterz.translate("Merci; d'être inscrit! C'est en août que ça commence? Regardez la suite:", true)).to eql("Merci ; d'être inscrite ! C'est en août que ça commence ? Regardez la suite :")
+    end
   end
 
   describe Conchiterz::StringMethods do

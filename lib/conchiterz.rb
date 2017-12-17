@@ -10,7 +10,7 @@ module Conchiterz
   def translate(string, switch, escape = [])
     return if string.nil?
     result = []
-    a_words = string.scan(/[[:alpha:][:digit:]]+|[.,!?';]+/)
+    a_words = string.scan(/[[:alpha:][:digit:]]+|[.,!?';:]+/)
     if switch == true
       a_words.each{ |word| analyze_string(word, result, escape) }
       check_punctuation(result)
@@ -71,11 +71,15 @@ module Conchiterz
   end
 
   def check_punctuation(result)
-    punctuation = [',','.','!',':',';','?']
     result.each_with_index do |val, index|
-      if punctuation.include?(val)
+      if PUNCTUATION.flatten.include?(val)
         index = result.index(val)
-        result[index].insert(0, result[index-1])
+        if PUNCTUATION[0].include?(val)
+          word = result[index-1] + ' '
+        else
+          word = result[index-1]
+        end
+        result[index].insert(0, word)
         result.delete(result[index-1])
       end
     end
@@ -98,6 +102,8 @@ module Conchiterz
       result.delete_at(index_to_delete)
     end
   end
+
+  PUNCTUATION = [[';',':','!','?'],['.',',','...']]
 
   TRANSLATION =
     {
