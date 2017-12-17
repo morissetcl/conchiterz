@@ -71,28 +71,14 @@ module Conchiterz
   end
 
   def check_punctuation(result)
-    space_punctuation_space(result)
-    punctuation_space(result)
-  end
-
-  def space_punctuation_space(result)
-    punctuation = [';',':','!','?']
     result.each_with_index do |val, index|
-      if punctuation.include?(val)
+      if PUNCTUATION.flatten.include?(val)
         index = result.index(val)
-        word =  result[index-1]+ ' '
-        result[index].insert(0, word)
-        result.delete(result[index-1])
-      end
-    end
-  end
-
-  def punctuation_space(result)
-    punctuation = ['.',',','...']
-    result.each_with_index do |val, index|
-      if punctuation.include?(val)
-        index = result.index(val)
-        word =  result[index-1]
+        if PUNCTUATION[0].include?(val)
+          word = result[index-1] + ' '
+        else
+          word = result[index-1]
+        end
         result[index].insert(0, word)
         result.delete(result[index-1])
       end
@@ -116,6 +102,8 @@ module Conchiterz
       result.delete_at(index_to_delete)
     end
   end
+
+  PUNCTUATION = [[';',':','!','?'],['.',',','...']]
 
   TRANSLATION =
     {
