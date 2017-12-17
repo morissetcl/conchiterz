@@ -23,7 +23,7 @@ describe Conchiterz do
     expect(Conchiterz.translate('Il est JOYEUX, vraiment joyeux', false)).to eql('Il est JOYEUX, vraiment joyeux')
   end
   it 'handle word with special character as accent' do
-    expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence")
+    expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence. Prêt à devenir sculpteur?", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence. Prêt à devenir sculptrice ?")
   end
 
   it 'translate word with only one letter' do
