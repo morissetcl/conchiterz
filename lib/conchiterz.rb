@@ -89,7 +89,7 @@ module Conchiterz
 
   def check_special_character(result)
     result.each_with_index do |val, index|
-      if val == "'" || val == '-'
+      if SPECIAL_CHARACTER.include?(val)
         index = result.index(val)
         word = [result[index-1], result[index], result[index+1]]
         delete_useless_value(word, index, result)
@@ -105,6 +105,7 @@ module Conchiterz
     end
   end
 
+  SPECIAL_CHARACTER = ["'","-"]
   PUNCTUATION = [[';',':','!','?'],['.',',','...']]
   TRANSLATION = YAML.load_file('lib/words.yaml')
 end

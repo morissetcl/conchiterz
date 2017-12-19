@@ -26,6 +26,10 @@ describe Conchiterz do
     expect(Conchiterz.translate("Merci, d'être inscrit, ç'est en août que ça commence. Prêt à devenir sculpteur?", true)).to eql("Merci, d'être inscrite, ç'est en août que ça commence. Prêt à devenir sculptrice ?")
   end
 
+  it 'handle special character' do
+    expect(Conchiterz.translate("Merci, d'être inscrit à Post-It", true)).to eql("Merci, d'être inscrite à Post-It")
+  end
+
   it 'translate word with only one letter' do
     expect(Conchiterz.translate('M Lawson', true)).to eql('Mme Lawson')
   end
