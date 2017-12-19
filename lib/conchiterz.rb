@@ -12,7 +12,7 @@ module Conchiterz
   def translate(string, switch, escape = [])
     return if string.nil?
     result = []
-    a_words = string.scan(/[[:alpha:][:digit:]]+|[.,!?';:-]+/)
+    a_words = string.scan(REGEXP)
     if switch == true
       a_words.each{ |word| analyze_string(word, result, escape) }
       check_punctuation(result)
@@ -108,6 +108,7 @@ module Conchiterz
   SPECIAL_CHARACTER = ["'","-"]
   PUNCTUATION = [[';',':','!','?'],['.',',','...']]
   TRANSLATION = YAML.load_file('lib/words.yaml')
+  REGEXP = /[[:alpha:][:digit:]]+|[.,!?';:-]+/
 end
 
 if defined?(Rails)
