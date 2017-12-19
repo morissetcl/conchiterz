@@ -12,7 +12,7 @@ module Conchiterz
   def translate(string, switch, escape = [])
     return if string.nil?
     result = []
-    a_words = string.scan(/[[:alpha:][:digit:]]+|[.,!?';:]+/)
+    a_words = string.scan(/[[:alpha:][:digit:]]+|[.,!?';:-]+/)
     if switch == true
       a_words.each{ |word| analyze_string(word, result, escape) }
       check_punctuation(result)
@@ -89,7 +89,7 @@ module Conchiterz
 
   def check_special_character(result)
     result.each_with_index do |val, index|
-      if val == "'"
+      if val == "'" || val == '-'
         index = result.index(val)
         word = [result[index-1], result[index], result[index+1]]
         delete_useless_value(word, index, result)
