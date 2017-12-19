@@ -106,7 +106,7 @@ module Conchiterz
   end
 
   PUNCTUATION = [[';',':','!','?'],['.',',','...']]
-  TRANSLATION = YAML.load_file("lib/words.yaml")
+  TRANSLATION = YAML.load_file('lib/words.yaml')
 end
 
 if defined?(Rails)
