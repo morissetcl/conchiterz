@@ -76,14 +76,18 @@ module Conchiterz
     result.each_with_index do |val, index|
       if PUNCTUATION.flatten.include?(val)
         index = result.index(val)
-        if PUNCTUATION[0].include?(val)
-          word = result[index-1] + ' '
-        else
-          word = result[index-1]
-        end
+        word = return_word_with_space_or_not(val, result, index)
         result[index].insert(0, word)
         result.delete(result[index-1])
       end
+    end
+  end
+
+  def return_word_with_space_or_not(val, result, index)
+    if PUNCTUATION[0].include?(val)
+      result[index-1] + ' '
+    else
+      result[index-1]
     end
   end
 
@@ -108,7 +112,7 @@ module Conchiterz
   SPECIAL_CHARACTER = ["'","-"]
   PUNCTUATION = [[';',':','!','?'],['.',',','...']]
   TRANSLATION = YAML.load_file('lib/words.yaml')
-  REGEXP = /[[:alpha:][:digit:]]+|[.,!?';:-]+/
+  REGEXP = /[[:alpha:][:digit:]]+|[[:punct:]]+/
 end
 
 if defined?(Rails)
