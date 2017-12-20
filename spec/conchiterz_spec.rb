@@ -37,10 +37,6 @@ describe Conchiterz do
     expect(Conchiterz.translate('M Lawson', false)).to eql('M Lawson')
   end
 
-  it 'handle and return number' do
-    expect(Conchiterz.translate("Vous êtes inscrit pour l'année 2018", true)).to eql("Vous êtes inscrite pour l'année 2018")
-  end
-
   it 'one word escaped: does not change a word which is included in escape array' do
     expect(Conchiterz.translate("Martin, vous êtes beau, nous vous souhaitons un joyeux anniversaire", true, ['joyeux', 'un'])).to eql('Martin, vous êtes belle, nous vous souhaitons un joyeux anniversaire')
   end

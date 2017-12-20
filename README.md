@@ -1,12 +1,13 @@
 [![Gem Version](https://badge.fury.io/rb/conchiterz.svg)](https://badge.fury.io/rb/conchiterz)
 # Conchiterz
 
-A simply gem to feminize french word and french sentence.
+A simply gem to feminize french word/sentence.
 
-* Keep intact upcase, downcase and capitalize letters
-* Handle numbers
-* Keep intact punctuation
-* Handle special characters
+* Keep intact upcase, downcase and capitalize letters.
+* Allows you to escape some words if you does not want feminize them.
+* Handle and return punctuation according the [french rules](http://www.la-ponctuation.com/). (.;:!...,?)
+* Keep intact word with accent. (éèêâàûôî)
+* Handle some special character. ('-%)
 
 ## Installation
 
