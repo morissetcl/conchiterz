@@ -2,6 +2,7 @@ require 'yaml'
 
 module Conchiterz
   extend self
+  attr_reader :result
 
   module StringMethods
     def conchiterz(switch, escape = [])
@@ -11,16 +12,18 @@ module Conchiterz
 
   def translate(string, switch, escape = [])
     return if string.nil?
-    result = []
+    return string unless switch
+
+    @result = []
     a_words = string.scan(REGEXP)
-    if switch == true
-      a_words.each{ |word| analyze_string(word, result, escape) }
-      check_punctuation(result)
-      check_special_character(result)
-      result.join(' ')
-    else
-      return string
-    end
+    a_words.each{ |word| analyze_string(word, escape) }
+    check_special_format
+    result.join(' ')
+  end
+
+  def check_special_format
+    check_punctuation
+    check_special_character
   end
 
   def monkey_patch(str)
@@ -29,12 +32,13 @@ module Conchiterz
 
   private
 
-  def analyze_string(word, result, escape)
+  def analyze_string(word, escape)
+    @word = word
     check_word_length(word)
-    if TRANSLATION.has_key?(word.downcase) && escape.include?(word)
+    if escape.include?(word)
       result.push(word)
     elsif TRANSLATION.has_key?(word.downcase)
-      get_value(@capitalized, @upcased, result, word)
+      get_value(@capitalized, @upcased, word)
     else
       result.push(word)
     end
@@ -42,48 +46,55 @@ module Conchiterz
 
   def check_word_length(word)
     if word.length == 1
-      @capitalized = (word == word.capitalize)
+      @capitalized = capitalized? word
     else
-      @capitalized = (word == word.capitalize)
-      @upcased = (word == word.upcase)
+      @capitalized, @upcased = capitalized?(word), upcased?(word)
     end
   end
 
-  def get_value(capitalized, upcased, result, word)
-    value = TRANSLATION.fetch(word.downcase)
-    add_value_to_result(capitalized, upcased, value, result)
+  def capitalized? word
+    word == word.capitalize
   end
 
-  def add_value_to_result(capitalized, upcased, value, result)
+  def upcased? word
+    word == word.upcase
+  end
+
+  def get_value(capitalized, upcased, word)
+    value = TRANSLATION.fetch(word.downcase)
+    add_value_to_result(capitalized, upcased, value)
+  end
+
+  def add_value_to_result(capitalized, upcased, value)
     if check_sensitive(capitalized, upcased) == false
       result << value
     else
-      capitalize_or_upcase(capitalized, upcased, value, result)
+      capitalize_or_upcase(capitalized, upcased, value)
     end
   end
 
   def check_sensitive(capitalized, upcased)
-    return if (capitalized == true || upcased == true)
+    return if (capitalized || upcased)
     false
   end
 
-  def capitalize_or_upcase(capitalized, upcased, value, result)
+  def capitalize_or_upcase(capitalized, upcased, value)
     result << value.capitalize if capitalized
     result << value.upcase if upcased
   end
 
-  def check_punctuation(result)
+  def check_punctuation
     result.each_with_index do |val, index|
       if PUNCTUATION.flatten.include?(val)
         index = result.index(val)
-        word = return_word_with_space_or_not(val, result, index)
+        word = return_word_with_space_or_not(val, index)
         result[index].insert(0, word)
         result.delete(result[index-1])
       end
     end
   end
 
-  def return_word_with_space_or_not(val, result, index)
+  def return_word_with_space_or_not(val, index)
     if PUNCTUATION[0].include?(val)
       result[index-1] + ' '
     else
@@ -91,18 +102,18 @@ module Conchiterz
     end
   end
 
-  def check_special_character(result)
+  def check_special_character
     result.each_with_index do |val, index|
       if SPECIAL_CHARACTER.include?(val)
         index = result.index(val)
         word = [result[index-1], result[index], result[index+1]]
-        delete_useless_value(word, index, result)
+        delete_useless_value(word, index)
         result.insert(index-1, word.join(''))
       end
     end
   end
 
-  def delete_useless_value(word, index, result)
+  def delete_useless_value(word, index)
     word.each do |a|
       index_to_delete = result.index(a)
       result.delete_at(index_to_delete)
