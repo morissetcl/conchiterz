@@ -63,7 +63,7 @@ describe Conchiterz do
 
     it "monkey_patch switch of the same way than without" do
       expect(@masculin.conchiterz(true, ['joyeux', 'bon'])).to eq(Conchiterz.translate(@masculin, true, ['joyeux', 'bon']))
-      expect( @masculin.conchiterz(false)).to eq(Conchiterz.translate(@masculin, false))
+      expect(@masculin.conchiterz(false)).to eq(Conchiterz.translate(@masculin, false))
     end
   end
 end
