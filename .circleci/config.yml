@@ -17,12 +17,6 @@ jobs:
           name: Which bundler?
           command: bundle -v
 
-      # Restore bundle cache
-      - restore_cache:
-          keys:
-            - rails-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - rails-bundle-v2-
-
       - run:
           name: Bundle Install
           command: bundle check || bundle install
@@ -32,7 +26,7 @@ jobs:
           key: rails-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-            
+
       - run:
           name: Run rspec in parallel
           command: bundle exec rspec --profile
