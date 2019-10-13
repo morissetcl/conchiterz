@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/circleci/build/github/morissetcl/conchiterz/master)
+![Build Status](https://img.shields.io/circleci/build/github/morissetcl/conchiterz/master)
 [![Gem Version](https://badge.fury.io/rb/conchiterz.svg)](https://badge.fury.io/rb/conchiterz)
 # Conchiterz
 
