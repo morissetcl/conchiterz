@@ -19,7 +19,9 @@ module Conchiterz
 
     @result = []
     a_words = string.scan(Config::REGEXP)
-    a_words.each { |word| Typography.new(word, escape, result).call }
+    a_words.each do |word|
+      Typography.new(word, escape, result).call
+    end
     HandlePeculiarity.new(@word, result).call
     result.join(' ')
   end
