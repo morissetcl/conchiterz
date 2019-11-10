@@ -36,7 +36,6 @@ describe Conchiterz do
   it 'does not translate sentence if the switch trigger is set to false' do
     expect(Conchiterz.translate('M Lawson', false)).to eql('M Lawson')
   end
-
   it 'one word escaped: does not change a word which is included in escape array' do
     expect(Conchiterz.translate("Martin, vous êtes beau, nous vous souhaitons un joyeux anniversaire", true, ['joyeux', 'un'])).to eql('Martin, vous êtes belle, nous vous souhaitons un joyeux anniversaire')
   end
