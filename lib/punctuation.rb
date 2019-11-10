@@ -1,10 +1,9 @@
 require 'config'
 
-class HandlePeculiarity # mostly handle punctuation and special character like "-"
-  attr_reader :word, :result
+class Punctuation # mostly handle punctuation and special character like "-"
+  attr_reader :result
 
-  def initialize(word, result)
-    @word = word
+  def initialize(result)
     @result = result
   end
 

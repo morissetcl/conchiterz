@@ -1,6 +1,6 @@
 require 'yaml'
 require 'config'
-require 'handle_peculiarity'
+require 'punctuation'
 require 'typography'
 
 module Conchiterz
@@ -22,7 +22,7 @@ module Conchiterz
     a_words.each do |word|
       Typography.new(word, escape, result).call
     end
-    HandlePeculiarity.new(@word, result).call
+    Punctuation.new(result).call
     result.join(' ')
   end
 
